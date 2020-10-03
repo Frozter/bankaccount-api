@@ -30,11 +30,12 @@ public class BankAccountRestController {
     public BankAccount getOne(@PathVariable int id) {
         return repository.findById(id).get();
     }
-    
+
     @PostMapping
     public BankAccount create(@RequestBody BankAccount bankAccount) {
-        repository.save(bankAccount);
-        return bankAccount;
+        BankAccount record = repository.save(bankAccount);
+        repository.flush();
+        return record;
     }
 
     @PutMapping("/{id}")
